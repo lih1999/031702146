@@ -27,92 +27,92 @@ customer['姓名'] = num
 customer['手机'] = tel
 
 # 一级地址
-zhixiashi = ['北京', '上海', '天津', '重庆']
+director = ['北京', '上海', '天津', '重庆']
 if "自治区" in s:
-    one = re.sub(r'自治区.*$', "", s)  # 提取自治区
-    one += '自治区'
-    s = s.replace(one, '', 1)  # 删去自治区
+    first = re.sub(r'自治区.*$', "", s)  # 提取自治区
+    first += '自治区'
+    s = s.replace(first, '', 1)  # 删去自治区
 elif '省' not in s:
-    for direc in zhixiashi:
+    for direc in director:
         if direc in s:
-            one = direc
+            first = direc
             break
         else:
-            one = ""  # 该级地址为空
+            first = ""  # 该级地址为空
 else:
-    one = re.sub(r'省.*$', "", s)
-    one += '省'
-    s = s.replace(one, '', 1)  # 删去一级地址
-customer['地址'].append(one)
+    first = re.sub(r'省.*$', "", s)
+    first += '省'
+    s = s.replace(first, '', 1)  # 删去一级地址
+customer['地址'].append(first)
 
 # 二级
-erji = ['市', '地区', '盟', '自治州']
-for tw in erji:
+two = ['市', '地区', '盟', '自治州']
+for tw in two:
     if tw in s:
 
-        two = re.sub(tw + '.*$', "", s)
-        two += tw
-        s = s.replace(two, '', 1)  # 删去二级地址
+        second = re.sub(tw + '.*$', "", s)
+        second += tw
+        s = s.replace(second, '', 1)  # 删去二级地址
         break
     else:
-        two = ""
+        second = ""
 
-customer['地址'].append(two)
+customer['地址'].append(second)
 
 # 三级地址
-xianji = ['区', '县', '市', '自治县', '旗', '自治旗', '林区']
-for tr in xianji:
+county = ['区', '县', '市', '自治县', '旗', '自治旗', '林区']
+for tr in county:
     if tr in s:
-        three = re.sub(tr + '.*$', "", s)
-        three += tr
-        s = s.replace(three, '', 1)  # 删去三级地址
+        third = re.sub(tr + '.*$', "", s)
+        third += tr
+        s = s.replace(third, '', 1)  # 删去三级地址
         break
     else:
-        three = ""
+        third = ""
 
-customer['地址'].append(three)
+customer['地址'].append(third)
 
 # 四级地址
-zhenji = ['街道', '镇', '乡', '民族乡', '苏木', '民族苏木']
-for fr in zhenji:
+town = ['街道', '镇', '乡', '民族乡', '苏木', '民族苏木']
+for fr in town:
     if fr in s:
-        four = re.sub(fr + '.*$', "", s)
-        four += fr
-        s = s.replace(four, '', 1)  # 删去四级地址
+        fouth = re.sub(fr + '.*$', "", s)
+        fouth += fr
+        s = s.replace(fouth, '', 1)  # 删去四级地址
         break
     else:
-        four = ""
-customer['地址'].append(four)
+        fouth = ""
+customer['地址'].append(fouth)
 
 s = s.replace('.', '', 1)  # 删去句号
 # 五级地址
-cunji = ['街', '路', '村']
+village = ['街', '路', '村']
 if tag == '1':
-    five = s
-    customer['地址'].append(five)
+    fifth = s
+    customer['地址'].append(fifth)
 elif tag == '2' or '3':  # 继续划分五级以后的地址
-    for fv in cunji:
+    for fv in village:
         if fv in s:
-            five = re.sub(fv + '.*$', "", s)
-            five += fv
-            customer['地址'].append(five)
-            s = s.replace(five, '', 1)  # 删去五级地址
+            fifth = re.sub(fv + '.*$', "", s)
+            fifth += fv
+            customer['地址'].append(fifth)
+            s = s.replace(fifth, '', 1)  # 删去五级地址
             break
         else:
-            five = ""
+            fifth = ""
     # 六级地址
     if '号' not in s:
-        six = ""
+        sixth = ""
     else:
-        six = re.sub(r'号.*$', "", s)
-        six += '号'
-        s = s.replace(six, '', 1)  # 删去六级地址
+        sixth = re.sub(r'号.*$', "", s)
+        sixth += '号'
+        s = s.replace(sixth, '', 1)  # 删去六级地址
 
-    customer['地址'].append(six)
+    customer['地址'].append(sixth)
 
     # 七级地址
-    seven = s
-    customer['地址'].append(seven)
+    seventh = s
+    customer['地址'].append(seventh)
 
 json_str = json.dumps(customer, ensure_ascii=False)
 print(json_str)
