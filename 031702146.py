@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 # \d{11}表示十一位数字  {n}表示前面的字符还需要n个；\d表示数字
 import re
 import json
