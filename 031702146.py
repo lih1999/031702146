@@ -33,6 +33,7 @@ customer['手机'] = tel
 global first
 global direc
 # 一级地址
+tw = ''
 director = ['北京', '上海', '天津', '重庆'] # 直辖市
 province = ['河北', '山西', '辽宁', '吉林', '黑龙江', '江苏', '浙江', '安徽', '福建', '江西', '山东', '河南', '湖北', '湖南', '广东', '四川', '海南', '贵州', '云南', '陕西', '甘肃', '青海']
 if "自治区" in s:
@@ -53,7 +54,7 @@ elif '省' not in s:
             s = s.replace(first, '', 1)
             first = direc + '省'
 else:
-    tw = ''
+
     first = re.sub(r'省.*$', "", s)
     first += '省'
     s = s.replace(first, '', 1)  # 删去一级地址
