@@ -69,7 +69,6 @@ if tw in director:
             second = tw
             s = s.replace(second, '', 1)
             second = tw + '市'
-            s = s.replace(second, '', 1)
             s = s.replace('市', '', 1)
 else:
     for tw in two:
@@ -110,7 +109,7 @@ customer['地址'].append(fouth)
 
 s = s.replace('.', '', 1)  # 删去句号
 # 五级地址
-village = ['村']
+village = ['村','路','街']
 if tag == '1':
     fifth = s
     customer['地址'].append(fifth)
@@ -124,7 +123,14 @@ elif tag == '2' or '3':  # 继续划分五级以后的地址
             break
         else:
             fifth = ""
-
+# 六级地址
+if '号' not in s:
+    six = ""
+else:
+    six = re.sub(r'号.*$', "", s)
+    six += '号'
+    s = s.replace(six, '', 1)  # 删去六级地址
+    customer['地址'].append(six)
 # 七级地址
     seventh = s
     customer['地址'].append(seventh)
