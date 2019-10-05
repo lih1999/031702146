@@ -27,7 +27,7 @@ num = re.sub(r',.*$', "", s)  # 提取人名
 s = re.sub(num, '', s)  # 删去人名
 s = re.sub(r',', '', s)  # 删去逗号
 
-num = re.sub(r'!.*$', '', num)
+num = re.sub(r'^.*!', '', num)
 
 customer['姓名'] = num
 customer['手机'] = tel
