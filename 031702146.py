@@ -27,11 +27,13 @@ num = re.sub(r',.*$', "", s)  # 提取人名
 s = re.sub(num, '', s)  # 删去人名
 s = re.sub(r',', '', s)  # 删去逗号
 
+num = re.sub(r'1!', '', num)
+num = re.sub(r'2!', '', num)
 customer['姓名'] = num
 customer['手机'] = tel
 
 # 一级地址
-director = ['北京', '上海', '天津', '重庆']
+director = ['北京', '上海', '天津', '重庆'] # 直辖市
 if "自治区" in s:
     first = re.sub(r'自治区.*$', "", s)  # 提取自治区
     first += '自治区'
@@ -49,7 +51,7 @@ else:
     s = s.replace(first, '', 1)  # 删去一级地址
 customer['地址'].append(first)
 
-# 二级
+# 二级地址
 two = ['市', '地区', '盟', '自治州']
 for tw in two:
     if tw in s:
@@ -104,7 +106,7 @@ elif tag == '2' or '3':  # 继续划分五级以后的地址
             break
         else:
             fifth = ""
-    # 六级地址
+# 六级地址
     if '号' not in s:
         sixth = ""
     else:
@@ -114,7 +116,7 @@ elif tag == '2' or '3':  # 继续划分五级以后的地址
 
     customer['地址'].append(sixth)
 
-    # 七级地址
+# 七级地址
     seventh = s
     customer['地址'].append(seventh)
 
