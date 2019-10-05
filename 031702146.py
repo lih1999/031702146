@@ -43,6 +43,7 @@ elif '省' not in s:
     for direc in director:
         if direc in s:
             first = direc
+            tw = direc
             break
         else:
             first = ""  # 该级地址为空
@@ -52,21 +53,31 @@ elif '省' not in s:
             s = s.replace(first, '', 1)
             first = direc + '省'
 else:
+    tw = ''
     first = re.sub(r'省.*$', "", s)
     first += '省'
     s = s.replace(first, '', 1)  # 删去一级地址
 customer['地址'].append(first)
 
 # 二级地址
-two = ['市', '地区', '盟', '自治州']
-for tw in two:
-    if tw in s:
-        second = re.sub(tw + '.*$', "", s)
-        second += tw
-        s = s.replace(second, '', 1)  # 删去二级地址
-        break
-    else:
-        second = ""
+director = ['北京', '上海', '天津', '重庆']
+two = ['地区', '盟', '自治州','市']
+if tw in director:
+    for tw in director:
+        if tw in s:
+            second = tw
+            s = s.replace(second, '', 1)
+            second = tw + '市'
+            s = s.replace(second, '', 1)
+else:
+    for tw in two:
+        if tw in s:
+            second = re.sub(tw + '.*$', "", s)
+            second += tw
+            s = s.replace(second, '', 1)  # 删去二级地址
+            break
+        else:
+            second = ""
 
 customer['地址'].append(second)
 
