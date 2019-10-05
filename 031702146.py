@@ -30,9 +30,11 @@ s = re.sub(r',', '', s)  # 删去逗号
 num = re.sub(r'^.*!', '', num)
 customer['姓名'] = num
 customer['手机'] = tel
-
+global first
+global direc
 # 一级地址
 director = ['北京', '上海', '天津', '重庆'] # 直辖市
+province = ['河北', '山西', '辽宁', '吉林', '黑龙江', '江苏', '浙江', '安徽', '福建', '江西', '山东', '河南', '湖北', '湖南', '广东', '四川', '海南', '贵州', '云南', '陕西', '甘肃', '青海']
 if "自治区" in s:
     first = re.sub(r'自治区.*$', "", s)  # 提取自治区
     first += '自治区'
@@ -41,6 +43,14 @@ elif '省' not in s:
     for direc in director:
         if direc in s:
             first = direc
+            break
+        else:
+            first = ""  # 该级地址为空
+    for direc in province:
+        if direc in s:
+            first = direc
+            s = s.replace(first, '', 1)
+            first = direc + '省'
             break
         else:
             first = ""  # 该级地址为空
@@ -54,7 +64,6 @@ customer['地址'].append(first)
 two = ['市', '地区', '盟', '自治州']
 for tw in two:
     if tw in s:
-
         second = re.sub(tw + '.*$', "", s)
         second += tw
         s = s.replace(second, '', 1)  # 删去二级地址
