@@ -46,14 +46,6 @@ elif '省' not in s:
             break
         else:
             first = ""  # 该级地址为空
-    for direc in province:
-        if direc in s:
-            first = direc
-            s = s.replace(first, '', 1)
-            first = direc + '省'
-            break
-        else:
-            first = ""  # 该级地址为空
 else:
     first = re.sub(r'省.*$', "", s)
     first += '省'
