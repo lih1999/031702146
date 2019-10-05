@@ -5,9 +5,9 @@ import re
 import json
 
 customer = {
-    '姓名': '',
-    '手机': '',
-    '地址': [],
+    "姓名": "",
+    "手机": "",
+    "地址": [],
 }
 
 
@@ -28,7 +28,6 @@ s = re.sub(num, '', s)  # 删去人名
 s = re.sub(r',', '', s)  # 删去逗号
 
 num = re.sub(r'^.*!', '', num)
-
 customer['姓名'] = num
 customer['手机'] = tel
 
