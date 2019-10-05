@@ -70,6 +70,7 @@ if tw in director:
             s = s.replace(second, '', 1)
             second = tw + '市'
             s = s.replace(second, '', 1)
+            s = s.replace('市', '', 1)
 else:
     for tw in two:
         if tw in s:
