@@ -46,6 +46,11 @@ elif '省' not in s:
             break
         else:
             first = ""  # 该级地址为空
+    for direc in province:
+        if direc in s:
+            first = direc
+            s = s.replace(first, '', 1)
+            first = direc + '省'
 else:
     first = re.sub(r'省.*$', "", s)
     first += '省'
@@ -92,7 +97,7 @@ customer['地址'].append(fouth)
 
 s = s.replace('.', '', 1)  # 删去句号
 # 五级地址
-village = ['街', '路', '村']
+village = ['村']
 if tag == '1':
     fifth = s
     customer['地址'].append(fifth)
@@ -106,15 +111,6 @@ elif tag == '2' or '3':  # 继续划分五级以后的地址
             break
         else:
             fifth = ""
-# 六级地址
-    if '号' not in s:
-        sixth = ""
-    else:
-        sixth = re.sub(r'号.*$', "", s)
-        sixth += '号'
-        s = s.replace(sixth, '', 1)  # 删去六级地址
-
-    customer['地址'].append(sixth)
 
 # 七级地址
     seventh = s
